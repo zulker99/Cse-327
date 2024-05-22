@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+@{
+    string UserID = Context.Request.Cookies["UserID"];
+    string AdminID = Context.Request.Cookies["AdminID"];
+    string Name = Context.Request.Cookies["Name"];
+    string Email = Context.Request.Cookies["Email"];
+    string Phone = Context.Request.Cookies["PhoneNumber"];
+
+}
+
+
+<!-- Start Page Heading -->
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="sidebar" style="margin-top:80px">
+                @if (AdminID != "" && AdminID != null)
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">Admin Menu</p>
+                    <br>
+                }
+                else
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">User Menu</p>
+                    <br>
+                }
+                <ul class="menu" style="list-style-type: none;">
+
+                    <li>
+                        <a href="#" class="menu-item" data-partial-view="Dashboard" style=" text-decoration: none;font-size: 20px; margin-top:10px;color:#0dcaf0; font-weight:500; position: relative;">
+                            > Profile
+                            <span class="line"></span>
+                        </a>
+                    </li>
+                    <br>
+                    @if (AdminID != "" && AdminID != null)
+                    {
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Orders</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Inventory</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Vendors</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Users</a></li>
+                        <br />
+                    }
+
+
+                    <li><a asp-controller="User" asp-action="MakePost" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Create a Post</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="CalculateCGPA" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Calculate CGPA</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="SignOut" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Sign Out</a></li>
+                    <br />
+                    <!-- Add more menu items as needed -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="main-content">
+                <div class="ec-shop-rightside col-lg-9 col-md-12">
+                    <div class="ec-vendor-dashboard-card ec-vendor-setting-card">
+                        <div class="ec-vendor-card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ec-vendor-block-profile">
+                                        <div class="ec-vendor-block-img space-bottom-30">
+                                            @* <div class="ec-vendor-block-bg">
+                                            <a href="#" class="btn btn-lg btn-primary"
+                                            data-link-action="editmodal" title="Edit Detail"
+                                            data-bs-toggle="modal" data-bs-target="#edit_modal">Edit Detail</a>
+                                            </div>*@
+                                            <div class="ec-vendor-block-detail">
+                                                @*<img class="v-img" src="~/assets/images/user/1.jpg" alt="vendor image">*@
+
+                                                <h5 class="name" style="padding-top:50px"> Hello @Name!</h5>
+                                            </div>
+                                            <p>You will be able to control your account and view your history within the dashboard.</p>
+                                        </div>
+                                        <h5 style="margin-top:50px">Account Information: </h5>
+
+
+                                        <form method="post">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="ec-vendor-detail-block ec-vendor-block-email space-bottom-10">
+                                                        <h6>Full Name<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                        <input type="text" name="FullName" class="form-control" placeholder="Full Name" aria-label="Username" value="@Name" aria-describedby="basic-addon1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="ec-vendor-detail-block ec-vendor-block-email space-bottom-10">
+                                                        <h6>Email <a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                        <input type="email" name="Email" class="form-control" placeholder="Email" aria-label="Username" value="@Email" aria-describedby="basic-addon1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12" style="padding-top:20px">
+                                                    <div class="ec-vendor-detail-block ec-vendor-block-contact space-bottom-10">
+                                                        <h6>Phone Number<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                        <input type="text" name="PhoneNumber" class="form-control" placeholder="Username" aria-label="Phone" value="@Phone" aria-describedby="basic-addon1">
+                                                    </div>
+                                                </div>
+
+                                                <input type="text" name="ID" class="form-control" placeholder="Username" aria-label="Phone" value="@UserID" aria-describedby="basic-addon1" hidden>
+
+                                                <span class="text-center mb-3">
+                                                    <button class="btn btn-primary" type="submit" asp-controller="User" asp-action="UpdateUser" style="background-color: #0dcaf0;margin-top:70px">Update</button>
+                                                </span>
+
+                                            </div>
+                                        </form>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

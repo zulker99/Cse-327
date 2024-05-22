@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-5">
+            <!-- Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Sign In</h4>
+                    <!-- Sign In Form -->
+                    <form action="#" method="post">
+                        <div class="mb-3 row">
+                            <label for="emailInput" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com">
+                            </div>
+                        </div>
+                        <!-- Password input -->
+                        <div class="mb-3 row">
+                            <label for="passwordInput" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Password">
+                            </div>
+                        </div>
+                        <!-- Submit button -->
+                        <div class="mb-3 row">
+                            <div class="col-sm-12">
+                                <button type="submit" asp-controller="User" asp-action="LoginUser" class="btn btn-primary w-100">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Register Link -->
+            <div class="text-center mt-3">
+                <p>Don't have an account? <a href="register.html">Register</a></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Sign Up";
+    var popupScript = TempData["PopupScript"] as string;
+    TempData["PopupScript"] = ""; 
+}
+
+@if (!string.IsNullOrEmpty(popupScript))
+{
+    @Html.Raw(popupScript)
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-5">
+            <!-- Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Register</h4>
+                    <!-- Registration Form -->
+                    <form action="#" method="post">
+                        <!-- Name input -->
+                        <div class="mb-3 row">
+                            <label for="nameInput" class="col-sm-3 col-form-label">Full Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="John Doe">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nameInput" class="col-sm-3 col-form-label">Phone Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="01XXXXXXXXX">
+                            </div>
+                        </div>
+                        <!-- Email input -->
+                        <div class="mb-3 row">
+                            <label for="emailInput" class="col-sm-3 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com">
+                            </div>
+                        </div>
+                        <!-- Password input -->
+                        <div class="mb-3 row">
+                            <label for="passwordInput" class="col-sm-3 col-form-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="passwordInput" name="passwordInput"  placeholder="Password">
+                            </div>
+                        </div>
+                        <!-- Confirm Password input -->
+                        <div class="mb-3 row">
+                            <label for="confirmPasswordInput" class="col-sm-3 col-form-label">Confirm Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="confirmPasswordInput" name="confirmPasswordInput" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <!-- Submit button -->
+                        <div class="mb-3 row">
+                            <div class="col-sm-12">
+                                <button type="submit" asp-controller="User" asp-action="SignUpUser" class="btn btn-primary w-100">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Sign In Link -->
+            <div class="text-center mt-3">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+</div>

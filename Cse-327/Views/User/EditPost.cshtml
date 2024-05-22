@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Make Post";
+
+    string UserID = Context.Request.Cookies["UserID"];
+    string AdminID = Context.Request.Cookies["AdminID"];
+    string Name = Context.Request.Cookies["Name"];
+    string Email = Context.Request.Cookies["Email"];
+    string Phone = Context.Request.Cookies["PhoneNumber"];
+
+    var popupScript = TempData["PopupScript"] as string;
+    TempData["PopupScript"] = "";
+}
+
+@if (!string.IsNullOrEmpty(popupScript))
+{
+    @Html.Raw(popupScript)
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="sidebar" style="margin-top:80px">
+                @if (AdminID != "" && AdminID != null)
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">Admin Menu</p>
+                    <br>
+                }
+                else
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">User Menu</p>
+                    <br>
+                }
+                <ul class="menu" style="list-style-type: none;">
+
+                    <li><a asp-controller="User" asp-action="UserDashBoard" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Profile</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="MakePost" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Create a Post</a></li>
+                    <br />
+                    @if (AdminID != "" && AdminID != null)
+                    {
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Orders</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Inventory</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Vendors</a></li>
+                        <br />
+                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Users</a></li>
+                        <br />
+                    }
+
+                    <li><a asp-controller="User" asp-action="CalculateCGPA" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Calculate CGPA</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="SignOut" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Sign Out</a></li>
+                    <br />
+                    <!-- Add more menu items as needed -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h2 class="text-center">Edit Post</h2> <br />
+                        <form method="post">
+                            <div class="mb-3 row">
+                                <!-- Added 'row' here to layout label and input side by side -->
+                                <label for="postTitle" class="col-sm-2 col-form-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="postTitle" name="postTitle" value="@ViewBag.ContentTitle" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="postContent" class="col-sm-2 col-form-label">Content</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="postContent" name="postContent" rows="3">@ViewBag.Content</textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="postImage" class="col-sm-2 col-form-label" >Image URL</label>
+                                <div class="col-sm-10">
+                                    <input type="url" class="form-control" id="postImage" value="@ViewBag.ImgUrl" name="postImage">
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="id" value="@ViewBag.ID" name="id" hidden>
+                            <button type="submit" class="btn btn-primary w-100" asp-controller="User" asp-action="UpdatePost">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

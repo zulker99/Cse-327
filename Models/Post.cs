@@ -11,7 +11,6 @@ namespace AcademicAssistant.Models
         [Required]
         public string Content { get; set; }
         public string ImgUrl { get; set; }
-
         [Required]
         public DateTime DateTime { get; set;}
         [Required]

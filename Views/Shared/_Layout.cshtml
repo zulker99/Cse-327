@@ -10,25 +10,64 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AcademicAssistant</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+        <div class="container-fluid p-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+                <div class="container-fluid justify-content-end">
+                    @* <img src="/img/navLogo - Cropped - bgremoved.png" alt="logo" class="logo" style="height: 50px;"> *@
+                    <h1><a asp-action="Index" asp-controller="Home" style="text-decoration: none">Academic Assistant</a></h1>
+                    <h5 style="padding-left: 40px"><a asp-action="Index" asp-controller="Home" style="text-decoration: none">Posts</a></h5>
+                    <h5 style="padding-left: 40px"><a asp-action="SeeBooks" asp-controller="Home" style="text-decoration: none">Documents</a></h5>
+                    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <!-- <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="index.html" target="_blank">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="#" target="_blank">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/contactus.html" target="_blank">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/aboutus.html" target="_blank">AboutUs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/addtocart.html" target="_blank"><i class="fa-solid fa-cart-shopping text-white"></i><sup>1</sup></a>
+                            </li> -->
+
+                            @{
+                                string userID = Context.Request.Cookies["UserID"];
+                                string adminID = Context.Request.Cookies["AdminID"];
+                            }
+
+                            @if (adminID == null && userID == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Home" asp-action="SignUp" target="_blank">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="Home" asp-action="LogIn" target="_blank">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="User" asp-action="UserDashboard" target="_blank">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-controller="User" asp-action="SignOut" target="_blank">Log Out</a>
+                                </li>                                
+                            }
+
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -43,6 +82,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

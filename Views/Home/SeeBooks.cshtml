@@ -1,0 +1,53 @@
+﻿@model IEnumerable<_ShowBook>
+
+    @{
+    ViewData["Title"] = "Books";
+    string UserID = Context.Request.Cookies["UserID"];
+    string AdminID = Context.Request.Cookies["AdminID"];
+    string Name = Context.Request.Cookies["Name"];
+    string Email = Context.Request.Cookies["Email"];
+    string Phone = Context.Request.Cookies["PhoneNumber"];
+    var popupScript = TempData["PopupScript"] as string;
+    TempData["PopupScript"] = "";
+    }
+
+    @if (!string.IsNullOrEmpty(popupScript))
+{
+    @Html.Raw(popupScript)
+}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Books</h1>
+        <form method="get" asp-action="SeeBooks">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="searchTerm" placeholder="Search for books or courses..." value="@ViewData["searchTerm"]" />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+
+        @foreach (var book in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">@book.Title</h5>
+                <p class="card-text">
+                    <strong>Course:</strong> @book.Course<br />
+                    <strong>Added by:</strong> @book.UserName<br />
+                    <strong>Time Added:</strong> @book.DateTime<br />
+                    <strong>Link:</strong> <a href="@book.FileUrl" target="_blank">Download</a>
+                </p>
+                <div class="dropdown" style="margin-right:10px">
+                    @* Dropdown menu for actions based on user role *@
+                    @if (!string.IsNullOrEmpty(AdminID) || UserID == book.UserID)
+                    {
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" asp-action="DeleteBook" asp-controller="User" asp-route-id="@book.ID">Delete Post</a></li>
+                    </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    </div>

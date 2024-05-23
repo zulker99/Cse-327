@@ -1,123 +1,105 @@
-using AcademicAssistant.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace AcademicAssistant.Controllers
+namespace AcademicAssistant.Models
 {
-    public class HomeController : Controller
+    /// <summary>
+    /// Represents a comment on a post.
+    /// </summary>
+    public class CommentViewModel
     {
-        private readonly ILogger<HomeController> _logger;
-        WebDbContext _webDB;
+        /// <summary>
+        /// Gets or sets the unique identifier for the comment.
+        /// </summary>
+        public string ID { get; set; }
 
+        /// <summary>
+        /// Gets or sets the unique identifier for the user who made the comment.
+        /// </summary>
+        public string UserID { get; set; }
 
-        public async Task<IActionResult> SeeBooks(string searchTerm)
-        {
-            var booksQuery = from book in _webDB.Books
-                             join user in _webDB.Users on book.UserID equals user.ID
-                             where book.Status == "Active"
-                             select new _ShowBook
-                             {
-                                 ID = book.ID,
-                                 Title = book.Title,
-                                 Course = book.Course,
-                                 FileUrl = book.FileUrl,
-                                 DateTime = book.DateTime,
-                                 UserName = user.Name,
-                                 Status = book.Status,
-                                 UserID = book.UserID
+        /// <summary>
+        /// Gets or sets the unique identifier for the post to which the comment belongs.
+        /// </summary>
+        public string PostID { get; set; }
 
-                             };
+        /// <summary>
+        /// Gets or sets the content of the comment.
+        /// </summary>
+        public string Content { get; set; }
 
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                booksQuery = booksQuery.Where(b => b.Title.Contains(searchTerm) || b.Course.Contains(searchTerm));
-            }
+        /// <summary>
+        /// Gets or sets the status of the comment.
+        /// </summary>
+        public string Status { get; set; }
 
-            var books = await booksQuery.ToListAsync();
-            return View(books);
-        }
+        /// <summary>
+        /// Gets or sets the date and time when the comment was created.
+        /// </summary>
+        public DateTime DateTime { get; set; }
 
+        /// <summary>
+        /// Gets or sets the username of the user who made the comment.
+        /// </summary>
+        public string UserName { get; set; }
+    }
 
+    /// <summary>
+    /// Represents a post that can be displayed, including comments.
+    /// </summary>
+    public class _ShowPost
+    {
+        /// <summary>
+        /// Gets or sets the unique identifier for the post.
+        /// </summary>
+        [Key]
+        public string ID { get; set; }
 
-        public IActionResult SignUp()
-        {
-            return View();
-        }
+        /// <summary>
+        /// Gets or sets the title of the post.
+        /// </summary>
+        [Required]
+        public string Title { get; set; }
 
-        
-        public IActionResult LogIn()
-        {
-            string UserID = HttpContext.Request.Cookies["UserID"];
-            string AdminID = HttpContext.Request.Cookies["AdminID"];
+        /// <summary>
+        /// Gets or sets the content of the post.
+        /// </summary>
+        [Required]
+        public string Content { get; set; }
 
-            if (UserID != null || AdminID != null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+        /// <summary>
+        /// Gets or sets the URL of the image associated with the post.
+        /// </summary>
+        public string ImgUrl { get; set; }
 
+        /// <summary>
+        /// Gets or sets the date and time when the post was created.
+        /// </summary>
+        [Required]
+        public DateTime DateTime { get; set; }
 
-            return View();
-        }
+        /// <summary>
+        /// Gets or sets the unique identifier for the user who created the post.
+        /// </summary>
+        [Required]
+        public string UserID { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, WebDbContext webDB)
-        {
-            _logger = logger;
-            _webDB = webDB;
-        }
+        /// <summary>
+        /// Gets or sets the username of the user who created the post.
+        /// </summary>
+        [Required]
+        public string UserName { get; set; }
 
-        public async Task<IActionResult> Index()
-        {
-            var postsWithUserNames = await (from post in _webDB.Posts
-                                            join user in _webDB.Users on post.UserID equals user.ID
-                                            where post.Status == "Active"
-                                            select new _ShowPost
-                                            {
-                                                ID = post.ID,
-                                                Title = post.Title,
-                                                Content = post.Content,
-                                                ImgUrl = post.ImgUrl,
-                                                DateTime = post.DateTime,
-                                                UserID = post.UserID,
-                                                UserName = user.Name, // Extracting the username from the Users table
-                                                Status = post.Status,
-                                                Comments = (from comment in _webDB.Comments
-                                                            join commentUser in _webDB.Users on comment.UserID equals commentUser.ID
-                                                            where comment.PostID == post.ID && comment.Status == "Active"
-                                                            select new CommentViewModel
-                                                            {
-                                                                ID = comment.ID,
-                                                                UserID = comment.UserID,
-                                                                PostID = comment.PostID,
-                                                                Content = comment.Content,
-                                                                Status = comment.Status,
-                                                                DateTime = comment.DateTime,
-                                                                UserName = commentUser.Name // Extracting the username from the Users table
-                                                            }).OrderBy(c=>c.DateTime).ToList()
-                                            }).ToListAsync();
+        /// <summary>
+        /// Gets or sets the status of the post.
+        /// </summary>
+        [Required]
+        public string Status { get; set; }
 
-
-
-
-            ViewBag.posts = postsWithUserNames;
-
-            return View();
-        }
-        public IActionResult AboutUs()
-        {
-            return View();
-        }
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        /// <summary>
+        /// Gets or sets the list of comments associated with the post.
+        /// </summary>
+        public List<CommentViewModel> Comments { get; set; }
     }
 }

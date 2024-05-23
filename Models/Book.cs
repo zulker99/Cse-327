@@ -11,7 +11,6 @@ namespace AcademicAssistant.Models
         [Required]
         public string Course { get; set; }
         public string FileUrl { get; set; }
-
         [Required]
         public DateTime DateTime { get; set; }
         [Required]

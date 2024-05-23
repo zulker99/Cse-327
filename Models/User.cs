@@ -20,6 +20,5 @@ namespace AcademicAssistant.Models
         public DateTime DateTime { get; set; } = DateTime.Now;
         [Required]
         public string AccountType { get; set; }
-
     }
 }

@@ -40,6 +40,8 @@
                     <br />
                     <li><a asp-controller="User" asp-action="MakePost" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Create a Post</a></li>
                     <br />
+                    <li><a asp-controller="User" asp-action="AddBooks" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Add Books</a></li>
+                    <br />
                     <li>
                         <a asp-controller="User" asp-action="CalculateCGPA" class="menu-item" data-partial-view="Dashboard" style=" text-decoration: none;font-size: 20px; margin-top:10px;color:#0dcaf0; font-weight:500; position: relative;">
                             > Calculate CGPA
@@ -47,17 +49,7 @@
                         </a>
                     </li>
                     <br>
-                    @if (AdminID != "" && AdminID != null)
-                    {
-                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Orders</a></li>
-                        <br />
-                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Inventory</a></li>
-                        <br />
-                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Vendors</a></li>
-                        <br />
-                        <li><a href="#" class="menu-item" style=" text-decoration: none;font-size: 20px;color:#0dcaf0; margin-top:10px">Users</a></li>
-                        <br />
-                    }
+                    
 
                     <li><a asp-controller="User" asp-action="SignOut" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Sign Out</a></li>
                     <br />

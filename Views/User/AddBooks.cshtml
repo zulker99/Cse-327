@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Add Book";
+
+    string UserID = Context.Request.Cookies["UserID"];
+    string AdminID = Context.Request.Cookies["AdminID"];
+    string Name = Context.Request.Cookies["Name"];
+    string Email = Context.Request.Cookies["Email"];
+    string Phone = Context.Request.Cookies["PhoneNumber"];
+
+    var popupScript = TempData["PopupScript"] as string;
+    TempData["PopupScript"] = "";
+}
+
+@if (!string.IsNullOrEmpty(popupScript))
+{
+    @Html.Raw(popupScript)
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="sidebar" style="margin-top:80px">
+                @if (AdminID != "" && AdminID != null)
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">Admin Menu</p>
+                    <br>
+                }
+                else
+                {
+                    <p style="font-size: 22px; margin-top:10px; color:#0dcaf0; font-weight:700">User Menu</p>
+                    <br>
+                }
+                <ul class="menu" style="list-style-type: none;">
+
+                    <li><a asp-controller="User" asp-action="UserDashBoard" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Profile</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="MakePost" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Create a Post</a></li>
+                    <br />
+                    <li>
+                        <a asp-controller="User" asp-action="AddBooks" class="menu-item" data-partial-view="Dashboard" style=" text-decoration: none;font-size: 20px; margin-top:10px;color:#0dcaf0; font-weight:500; position: relative;">
+                            > Add Books
+                            <span class="line"></span>
+                        </a>
+                    </li>
+                    <br>
+                  
+
+                    <li><a asp-controller="User" asp-action="CalculateCGPA" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Calculate CGPA</a></li>
+                    <br />
+                    <li><a asp-controller="User" asp-action="SignOut" class="menu-item" data-partial-view="History" style=" text-decoration: none;color:#0dcaf0;font-size: 20px; margin-top:10px">Sign Out</a></li>
+                    <br />
+                    <!-- Add more menu items as needed -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <h2 class="text-center">Add a New Documment</h2> <br />
+                        <form method="post">
+                            <div class="mb-3 row">
+                                <!-- Added 'row' here to layout label and input side by side -->
+                                <label for="postTitle" class="col-sm-2 col-form-label">Title</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="Title" name="Title" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="Course" class="col-sm-2 col-form-label">Course</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="Course" name="Course" required>
+                                        <option value="">Select a course</option>
+                                        <option value="">Select a Course</option>
+                                        <option value="MAT116: Pre-Calculus">MAT116: Pre-Calculus</option>
+                                        <option value="MAT120: Calculus I">MAT120: Calculus I</option>
+                                        <option value="MAT125: Linear Algebra">MAT125: Linear Algebra</option>
+                                        <option value="MAT130: Calculus II">MAT130: Calculus II</option>
+                                        <option value="CSE173: Discrete Mathematics">CSE173: Discrete Mathematics</option>
+                                        <option value="MAT361: Probability and Statistics">MAT361: Probability and Statistics</option>
+                                        <option value="MAT350: Engineering Mathematics">MAT350: Engineering Mathematics</option>
+                                        <option value="CSE115: Programming Language I">CSE115: Programming Language I</option>
+                                        <option value="CSE215: Programming Language II">CSE215: Programming Language II</option>
+                                        <option value="CSE225: Data Structures and Algorithm">CSE225: Data Structures and Algorithm</option>
+                                        <option value="CSE231: Digital Logic Design">CSE231: Digital Logic Design</option>
+                                        <option value="CSE332: Computer Organization and Architecture">CSE332: Computer Organization and Architecture</option>
+                                        <option value="CSE373: Design and Analysis of Algorithms">CSE373: Design and Analysis of Algorithms</option>
+                                        <option value="CSE311: Database Systems">CSE311: Database Systems</option>
+                                        <option value="CSE327: Software Engineering">CSE327: Software Engineering</option>
+                                        <option value="CSE331: Microprocessor Interfacing and Embedded System">CSE331: Microprocessor Interfacing and Embedded System</option>
+                                        <option value="CSE425: Concepts of Programming Language">CSE425: Concepts of Programming Language</option>
+                                        <option value="CSE499A: Senior Design I">CSE499A: Senior Design I</option>
+                                        <option value="CSE499B: Senior Design II">CSE499B: Senior Design II</option>
+                                        <option value="EEE141: Electric Circuit I">EEE141: Electric Circuit I</option>
+                                        <option value="EEE111: Analog Electronics I">EEE111: Analog Electronics I</option>
+                                        <option value="EEE452: Engineering Economics">EEE452: Engineering Economics</option>
+                                        <option value="ENG102: Introduction to Composition">ENG102: Introduction to Composition</option>
+                                        <option value="ENG103: Intermediate Composition">ENG103: Intermediate Composition</option>
+                                        <option value="ENG111: Public Speaking">ENG111: Public Speaking</option>
+                                        <option value="PHI104: Introduction to Ethics">PHI104: Introduction to Ethics</option>
+                                        <option value="HIS101: Bangladesh Culture and Heritage">HIS101: Bangladesh Culture and Heritage</option>
+                                        <option value="HIS102: Introduction to World Civilization">HIS102: Introduction to World Civilization</option>
+                                        <option value="POL101/POL104: Introduction to Political Science/Governance">POL101/POL104: Introduction to Political Science/Governance</option>
+                                        <option value="ECO101: Introduction to Microeconomics">ECO101: Introduction to Microeconomics</option>
+                                        <option value="BIO103: Biology I">BIO103: Biology I</option>
+                                        <option value="CHE101: Chemistry I">CHE101: Chemistry I</option>
+                                        <option value="SOC101/ANT101/ENV203(GEO205): Introduction to Sociology/Anthropology/Bangladesh Geography">SOC101/ANT101/ENV203(GEO205): Introduction to Sociology/Anthropology/Bangladesh Geography</option>
+
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="postImage" class="col-sm-2 col-form-label">File URL</label>
+                                <div class="col-sm-10">
+                                    <input type="url" class="form-control" id="File" name="File">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" asp-controller="User" asp-action="CreateBook">Submit</button>
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

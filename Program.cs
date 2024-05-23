@@ -1,7 +1,15 @@
+using AcademicAssistant;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<WebDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")),
+    ServiceLifetime.Transient);
 
 var app = builder.Build();
 

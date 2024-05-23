@@ -16,6 +16,5 @@ namespace AcademicAssistant.Models
         public string Status { get; set; }
         [Required]
         public DateTime DateTime { get; set; } = DateTime.Now;
-
     }
 }

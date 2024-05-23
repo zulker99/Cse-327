@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Semester 17th 241/CSE327.7 MMA1/All about Project/The Project/AcademicAssistant/Views/Home/SeeBooks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWVCb29rcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Semester 17th 241/CSE327.7 MMA1/All about Project/The Project/AcademicAssistant/Views/Home/SignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaWduVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Semester 17th 241/CSE327.7 MMA1/All about Project/The Project/AcademicAssistant/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Semester 17th 241/CSE327.7 MMA1/All about Project/The Project/AcademicAssistant/Views/User/AddBooks.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBZGRCb29rcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Semester 17th 241/CSE327.7 MMA1/All about Project/The Project/AcademicAssistant/Views/User/CalculateCGPA.cshtml]
